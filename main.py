@@ -25,3 +25,24 @@ net:list = compiler.compile(manager, """
 
 gpu_screen.start()
 # screen.start()
+
+
+
+
+
+
+
+
+
+
+# vertices: list = []
+# for x in range(0, 100):
+#      vertice = Vertice(manager, { "radius": 13, "position": Vector2(
+#      (random.randrange(-20, 90)  * x),
+#      (random.randrange(-20, 90)  * x)
+#      ), "color": (random.randrange(0, 255), random.randrange(0, 255), random.randrange(0, 255))})
+#      vertices.append(vertice)
+
+# for vertice in vertices:
+#     for other_vertice in vertices[1:]:
+#         vertice.connect(other_vertice, {"color": (66,66,66)})

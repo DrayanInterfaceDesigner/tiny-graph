@@ -12,13 +12,13 @@ class Screen(pyglet.window.Window):
         self.window_size = self.options.get("window_size", (400, 300))
         super().__init__(width=self.window_size[0], height=self.window_size[1])
         self.manager: Manager = manager
-        self.scale = 1
-        self.allow_zoom = False
-        self.mouse_pos = (0, 0)
-        self.dragging = False
-        self.translation = (0, 0)
-        self.last_translation = (0, 0)
-        self.update_interval = 1 / 60
+        self.scale:int = 1
+        self.allow_zoom:bool = False
+        self.mouse_pos:tuple = (0, 0)
+        self.dragging:bool = False
+        self.translation:tuple = (0, 0)
+        self.last_translation:tuple = (0, 0)
+        self.update_interval:float = 1 / 60
         self.set_handlers()
 
     def set_handlers(self):
@@ -104,13 +104,13 @@ class Screen_GPU_ACCEL_EXPERIMENTAL(pyglet.window.Window):
         self.window_size = self.options.get("window_size", (400, 300))
         super().__init__(width=self.window_size[0], height=self.window_size[1])
         self.manager: Manager = manager
-        self.scale = 1
-        self.allow_zoom = False
-        self.mouse_pos = (0, 0)
-        self.dragging = False
-        self.translation = (0, 0)
-        self.last_translation = (0, 0)
-        self.update_interval = 1 / 60
+        self.scale:int = 1
+        self.allow_zoom:bool = False
+        self.mouse_pos:tuple = (0, 0)
+        self.dragging:bool = False
+        self.translation:tuple = (0, 0)
+        self.last_translation:tuple = (0, 0)
+        self.update_interval:float = 1 / 60
         self.set_handlers()
         self.setup_opengl()
 
