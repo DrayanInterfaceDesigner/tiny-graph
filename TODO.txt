@@ -1,0 +1,6 @@
+
+[   ] - Consertar o infer_direction in Edge.
+[   ] - Melhorar as Labels, e automatizar o processo de criar Labels
+[   ] -  quando usando o Compiler.
+[   ] - Criar uma forma de desconectar vertices e/ou arestas
+[   ] - Otimizar conexões quadráticas
