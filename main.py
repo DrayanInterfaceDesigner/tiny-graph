@@ -1,6 +1,6 @@
 import pyglet
 import cairo
-from lib.graphics import Screen
+from lib.graphics import Screen, Screen_GPU_ACCEL_EXPERIMENTAL
 from lib.graphics.objects import Manager
 from lib.graphics.shapes import Vertice
 from lib.maths.Vector2 import Vector2
@@ -11,7 +11,8 @@ from lib.tools.parser import Parser
 
 manager: Manager = Manager()
 compiler: Compiler = Compiler({"color_steps": [(0,0, 255),(255,0,0)]})
-screen: Screen = Screen(manager, {"window_size": (1380, 720)})
+# screen: Screen = Screen(manager, {"window_size": (1380, 720)})
+gpu_screen: Screen = Screen_GPU_ACCEL_EXPERIMENTAL(manager, {"window_size": (1380, 720)})
 
 net:list = compiler.compile(manager, """
      P1(-40,-40) -> P2(40,-40)
@@ -22,5 +23,5 @@ net:list = compiler.compile(manager, """
      P7(0, -180)
 """)
 
-
-screen.start()
+gpu_screen.start()
+# screen.start()

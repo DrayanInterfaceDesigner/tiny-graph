@@ -1,4 +1,4 @@
-from lib.graphics.Screen    import Screen
+from lib.graphics.Screen    import Screen, Screen_GPU_ACCEL_EXPERIMENTAL
 from lib.graphics.Animate   import Animate
 from lib.graphics.Camera    import Camera
 from lib.graphics.Controls  import Controls
