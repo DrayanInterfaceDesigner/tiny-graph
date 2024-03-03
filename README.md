@@ -62,7 +62,7 @@ P1(x1,y1) operador_de_conexão **P2(x2,y2)**
 
 ```bibtex
 @software{drayan2024,
-  authors = {Drayan S. and Lucchin, Lucca and Nogueira, Matheus G. P. and Lucas and Joel and Antunes, Pedro L. and Zambão, João V.},
+  authors = {Drayan S. and Lucchin, Lucca and Nogueira, Matheus G. P. and Geremias, Lucas G. N. and Joel and Antunes, Pedro L. and Zambão, João V.},
   title = {TinyGraph},
   year = {2024},
   university = {Pontifícia Universidade Católica do Paraná - PUCPR}
