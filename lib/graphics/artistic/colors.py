@@ -1,10 +1,8 @@
 def lerp_colors(colors, t):
     num_segments = len(colors) - 1
     segment = int(t * num_segments)
-    print(num_segments)
 
     t_segment = (t * num_segments) - segment
-    print(segment+1)
     color1 = colors[segment]
     color2 = colors[segment + 1]
 

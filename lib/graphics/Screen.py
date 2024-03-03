@@ -47,7 +47,7 @@ class Screen(pyglet.window.Window):
     def on_mouse_scroll(self, x, y, scroll_x, scroll_y):
         scale = scroll_y * 0.1
         new_scale = self.scale + scale
-        self.scale = max(0.2, min(new_scale, 6))
+        self.scale = max(0.05, min(new_scale, 6))
         if 0.2 < self.scale < 3:
             self.allow_zoom = True
 
@@ -233,7 +233,7 @@ class Screen_GPU_ACCEL_EXPERIMENTAL(pyglet.window.Window):
     def on_mouse_scroll(self, x, y, scroll_x, scroll_y):
         scale = scroll_y * 0.1
         new_scale = self.scale + scale
-        self.scale = max(0.2, min(new_scale, 6))
+        self.scale = max(0.05, min(new_scale, 6))
         if 0.2 < self.scale < 3:
             self.allow_zoom = True
 

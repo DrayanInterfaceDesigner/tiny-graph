@@ -59,6 +59,12 @@ class Vertice(Object):
             "edge": edge
         })
 
+        vertice.connections.append({
+            "vertice": self, 
+            "weight": options.get("weight", 1), # 1 = "adjacent", 2 = "one-way", 3 = "bi-directional"
+            "edge": edge
+        })
+
     
     def disconnect(self, vertice):
         for connection in self.connections:
