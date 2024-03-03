@@ -24,17 +24,6 @@ net:list = compiler.compile(manager, """
      P7(0, -180)
 """)
 
-vertices: list = []
-for x in range(0, 10000):
-     vertice = Vertice(manager, { "radius": 13, "position": Vector2(
-     (random.randrange(-20, 90)  * x),
-     (random.randrange(-20, 90)  * x)
-     ), "color": (random.randrange(0, 255), random.randrange(0, 255), random.randrange(0, 255))})
-     vertices.append(vertice)
-
-for vertice in vertices[1:]:
-     vertice.connect(vertices[0], {"color": (66,66,66)})
-print(vertices)
 gpu_screen.start()
 # screen.start()
 
@@ -45,7 +34,17 @@ gpu_screen.start()
 
 
 
+# vertices: list = []
+# for x in range(0, 10000):
+#      vertice = Vertice(manager, { "radius": 13, "position": Vector2(
+#      (random.randrange(-20, 90)  * x),
+#      (random.randrange(-20, 90)  * x)
+#      ), "color": (random.randrange(0, 255), random.randrange(0, 255), random.randrange(0, 255))})
+#      vertices.append(vertice)
 
+# for vertice in vertices[1:]:
+#      vertice.connect(vertices[0], {"color": (66,66,66)})
+# print(vertices)
 
 # vertices: list = []
 # for x in range(0, 100):
