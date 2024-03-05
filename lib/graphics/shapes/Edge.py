@@ -6,17 +6,28 @@ import math
 import random
 
 class Edge(Object):
-    def __init__(self, manager: Manager, options: dict = {}) -> None:
+
+    DRAW_SIGNIFICANTLY_CHANGES_ONLY = True
+
+    def __init__(self, manager: Manager, options: dict = {}, consts:dict = {}) -> None:
         options['layer'] = options.get('layer', -1)
         super().__init__(manager, options)
         self.vertice_a: Vertice = options.get("vertice_a", None)
         self.vertice_b: Vertice = options.get("vertice_b", None)
+        self.vertices: list = [self.vertice_a, self.vertice_b]
+        
         self.color: tuple = options.get("color", (255, 255, 255))
         self.stroke_thickness: int = options.get("stroke_thickness", 1)
         self.direction: int = options.get("direction", 1)
         self.weight: int = options.get("weight", 1)
         self.radius: int = options.get("radius", 20)
         self.self_connection_rotation: float = 3.14 * random.uniform(0, 2)
+        self.draw_significantly_changes_only = consts.get("draw_significantly_changes_only", False)
+        if self.draw_significantly_changes_only:
+            self.vertices_cache:dict = {
+            "v_a_origin": self.vertice_a.original_position.copy(),
+            "v_b_origin": self.vertice_b.original_position.copy()
+        }
         self.draw_method: list = []
         self.infer_direction()
     
@@ -60,6 +71,18 @@ class Edge(Object):
                 ctx.stroke()
             self.draw_method.append(draw)
             
+    def is_connected_with(self, vertice: Vertice):
+        return vertice in self.vertices
+    
+    def origin_positions_changed(self) -> bool:
+        if self.vertices_cache["v_a_origin"] != self.vertice_a.original_position:
+            self.vertices_cache["v_a_origin"] = self.vertice_a.original_position
+            return True
+        elif self.vertices_cache["v_b_origin"] != self.vertice_b.original_position:
+            self.vertices_cache["v_b_origin"] = self.vertice_b.original_position
+            return True
+        return False
+        
     def directional_triangle(self, ctx):
         mid_x = (self.vertice_a.position.x + self.vertice_b.position.x) / 2
         mid_y = (self.vertice_a.position.y + self.vertice_b.position.y) / 2
@@ -78,7 +101,6 @@ class Edge(Object):
         
 
     def draw(self, ctx):
-        
         for draw_method in self.draw_method:
             draw_method(self, ctx)
     

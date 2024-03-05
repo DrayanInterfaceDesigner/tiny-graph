@@ -3,8 +3,10 @@ import cairo
 from pyglet.gl import *
 import numpy as np
 from lib.graphics.objects import Manager
-from lib.maths import Vector2
+from lib.maths.Vector2 import Vector2
+from lib.graphics.shapes import Vertice
 import ctypes
+from lib.graphics.shapes import Edge
 
 class Screen(pyglet.window.Window):
     def __init__(self, manager: Manager, options: dict = {}) -> None:
@@ -52,17 +54,32 @@ class Screen(pyglet.window.Window):
             self.allow_zoom = True
 
     def on_mouse_press(self, x, y, button, modifiers):
-        if button == pyglet.window.mouse.LEFT:
+        if button == pyglet.window.mouse.MIDDLE:
             self.dragging = True
             self.mouse_pos = (x, y)
+        if button == pyglet.window.mouse.LEFT:
+            mouse_pos:Vector2 = Vector2(((x - self.window_size[0] / 2) / self.scale) , ((y - self.window_size[1] / 2) * -1) / self.scale)
+            print(mouse_pos)
+            for obj in self.manager.objects:
+                if isinstance(obj, Vertice):
+                    if obj.position.distance(mouse_pos) < obj.radius:
+                        connections: list = [connection['edge'] for connection in obj.connections]
+                        print(obj.tag)
+                        for connection in connections:
+                            for vertice in connection.vertices:
+                                vertice.disconnect(obj)
+                            self.manager.remove(connection)
+                        self.manager.remove(obj)
+                        break
+        if button == pyglet.window.mouse.RIGHT:
+            print("RIGGT CLICK")
 
     def on_mouse_drag(self, x, y, dx, dy, buttons, modifiers):
         if self.dragging:
             self.translation = (self.translation[0] + dx, self.translation[1] + dy)
-            self.mouse_pos = (x, y)
 
     def on_mouse_release(self, x, y, button, modifiers):
-        if button == pyglet.window.mouse.LEFT:
+        if button == pyglet.window.mouse.MIDDLE:
             self.dragging = False
 
     def on_draw(self):
@@ -238,9 +255,25 @@ class Screen_GPU_ACCEL_EXPERIMENTAL(pyglet.window.Window):
             self.allow_zoom = True
 
     def on_mouse_press(self, x, y, button, modifiers):
-        if button == pyglet.window.mouse.LEFT:
+        if button == pyglet.window.mouse.MIDDLE:
             self.dragging = True
             self.mouse_pos = (x, y)
+        if button == pyglet.window.mouse.LEFT:
+            mouse_pos:Vector2 = Vector2(((x - self.window_size[0] / 2) / self.scale) , ((y - self.window_size[1] / 2) * -1) / self.scale)
+            print(mouse_pos)
+            for obj in self.manager.objects:
+                if isinstance(obj, Vertice):
+                    if obj.position.distance(mouse_pos) < obj.radius:
+                        connections: list = [connection['edge'] for connection in obj.connections]
+                        print(obj.tag)
+                        for connection in connections:
+                            for vertice in connection.vertices:
+                                vertice.disconnect(obj)
+                            self.manager.remove(connection)
+                        self.manager.remove(obj)
+                        break
+        if button == pyglet.window.mouse.RIGHT:
+            print("RIGGT CLICK")
 
     def on_mouse_drag(self, x, y, dx, dy, buttons, modifiers):
         if self.dragging:
