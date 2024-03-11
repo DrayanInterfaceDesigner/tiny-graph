@@ -7,6 +7,10 @@ class Label(Object):
         options['layer'] = options.get('layer', 1)
         super().__init__(manager, options)
 
+        self.target: Object = options.get("target", VEC_ZERO)
+        self.is_target_object: bool = isinstance(self.target, Object)
+        self.position: Vector2 = self.target.position if self.is_target_object else self.target
+
         self.label:str = options.get("label", "")
         self.font:str = options.get("font", "Arial")
         self.font_size:int = options.get("font_size", 12)
@@ -19,16 +23,18 @@ class Label(Object):
 
     def draw_background(self, ctx):
         characters_size_factor: int = len(self.label) * self.font_size
+        width:float = ((characters_size_factor / 1.66) * 2)
+        height:float = (self.font_size)/1.33
         if self.label_background is not None:
             ctx.set_source_rgb(
                 self.label_background_color[0]/255, 
                 self.label_background_color[1]/255, 
                 self.label_background_color[2]/255
             )
-            ctx.rectangle(self.position.x - characters_size_factor / 4, 
-                          self.position.y - self.font_size, 
-                          characters_size_factor + (self.background_padding[0] * 2), 
-                          self.font_size + (self.background_padding[1] * 2)
+            ctx.rectangle((self.position.x) - width/4, 
+                          (self.position.y) - height, 
+                          width, 
+                          height
                         )
             ctx.fill()
 
@@ -41,4 +47,7 @@ class Label(Object):
         ctx.show_text(self.label)
 
     def update(self, dt):
-        pass
+        self.position = self.target.position if isinstance(self.target, Object) else self.target
+        if self.is_target_object:
+            if self.target.marked_for_removal:
+                self.manager.remove(self)

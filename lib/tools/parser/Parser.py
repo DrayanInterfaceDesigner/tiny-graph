@@ -12,7 +12,8 @@ class Parser:
         pass
 
     def extract_signal(self, code: str) -> list:
-        return "".join(re.findall(r'(?:<->|<-|<|-|>|->)', code))
+        matches = "".join(re.findall(r'(?:<->|<-|<|-|>|->)', code))
+        return matches
 
     def extract_variables(self, code: str) -> list:
         return re.findall(r'P\d+', code)
@@ -32,7 +33,7 @@ class Parser:
 
     def map_signal(self, signal: str) -> int:
         if signal == "-": return 1
-        elif signal == "<-" or "->": return 2
+        elif signal == "<-" or signal == "->": return 2
         else: return 3
 
     def parse(self, code: str) -> dict:
@@ -44,6 +45,7 @@ class Parser:
             variables: list = self.extract_variables(line)
             coords: list = self.extract_coords(line)
             mapped_signal: int = self.map_signal(signal)
+            print(line, signal, mapped_signal)
 
             if not signal and len(variables) == 2: continue
             if not variables: continue

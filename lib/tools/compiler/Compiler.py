@@ -4,6 +4,7 @@ from lib.graphics.objects.Manager import Manager
 from lib.maths.Vector2 import Vector2
 from lib.tools.parser.Parser import Parser
 from lib.graphics.artistic.colors import *
+from lib.graphics.text.Label import Label
 
 class Compiler:
     def __init__(self, options:dict={}) -> None:
@@ -48,6 +49,12 @@ class Compiler:
             "font_size": 12, 
             "label": singleton
         })
+        
+        Label(manager, {
+            "label": singleton,
+            "target": vertice,
+        })
+
         self.built_singletons_counter += 1
 
         self.net.append(vertice)

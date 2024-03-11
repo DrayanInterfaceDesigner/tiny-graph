@@ -21,6 +21,7 @@ class Manager:
         return [obj for obj in self.objects if getattr(obj, prop) == value]
 
     def remove(self, obj):
+        obj.marked_for_removal = True
         self.objects.remove(obj)
 
     def update(self, dt):

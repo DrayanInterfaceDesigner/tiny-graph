@@ -11,6 +11,7 @@ class Object:
     }
 
     def __init__(self, manager: Manager, params:dict = DEFAULT) -> None:
+        self.marked_for_removal: bool = False
         self.position: Vector2 = params.get("position", VEC_ZERO)
         self.velocity: Vector2 = params.get("velocity", VEC_ZERO)
         self.speed: float = params.get("speed", 0)
